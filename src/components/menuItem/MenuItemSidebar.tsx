@@ -20,8 +20,14 @@ const MenuItemSidebar = () => {
       case 'Auth':
         navigate('/authentication');
         break;
+      case 'SignUp':
+        navigate('/signup');
+        break;
       case 'Product':
         navigate('/product');
+        break;
+      case 'Student':
+        navigate('/student');
         break;
       default:
         navigate('/');
@@ -40,6 +46,10 @@ const MenuItemSidebar = () => {
         return <InfoIcon />; 
       case 4:
         return <InfoIcon />; 
+      case 5:
+        return <InfoIcon />; 
+      case 6:
+        return <InfoIcon />; 
       default:
         return ; 
     }
@@ -48,7 +58,7 @@ const MenuItemSidebar = () => {
 
   return (  
     <List>
-      {['Home', 'About', 'Checkout', 'Auth', 'Product'].map((text, index) => (
+      {['Home', 'About', 'Checkout', 'Auth','SignUp', 'Product', 'Student'].map((text, index) => (
         <ListItem key={text} disablePadding>
           <ListItemButton onClick={() => handleNavigation(text)}>
             <ListItemIcon>

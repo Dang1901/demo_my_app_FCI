@@ -1,15 +1,19 @@
 import { Box, Grid, Typography } from "@mui/material";
 import DataTable from "../components/table/DataTable/DataTable";
-import CardMediaItem from "../components/card/CardMediaItem";
+// import CardMediaItem from "../components/card/CardMediaItem";
+
 
 const Product = () => {
+
+ 
+    
   return (
     <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
       <Typography sx={{ marginBottom: 2 }}>
         <DataTable />
       </Typography>
 
-      <Grid
+      {/* <Grid
         container
         spacing={{ xs: 2, md: 3 }}
         columns={{ xs: 4, sm: 8, md: 12 }}
@@ -19,8 +23,9 @@ const Product = () => {
             <CardMediaItem />
           </Grid>
         ))}
-      </Grid>
+      </Grid> */}
     </Box>
+
   );
 };
 

@@ -1,9 +1,11 @@
 import { Paper } from '@mui/material'
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import { rowsDataTable } from '../../../shared/enums';
+import { useQuery } from "@tanstack/react-query";
+import { getStudents } from '../../../apis/apiStudent';
 
 const columns: GridColDef[] = [
-    { field: 'id', headerName: 'ID', width: 70 },
+  { field: 'id', headerName: 'ID', width: 70 },
   { field: 'firstName', headerName: 'Họ', width: 130 },
   { field: 'lastName', headerName: 'Tên', width: 130 },
   {
@@ -24,6 +26,8 @@ const columns: GridColDef[] = [
   { field: 'birthday', headerName: 'Ngày sinh', width: 130 },   
 ]
 const paginationModel = { page: 0, pageSize: 5 };
+
+
 
 export default function DataTable() {
   return (
