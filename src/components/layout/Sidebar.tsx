@@ -1,7 +1,17 @@
 import { useNavigate } from 'react-router-dom';
 import { List, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
-import HomeIcon from '@mui/icons-material/Home';
-import InfoIcon from '@mui/icons-material/Info';
+import {
+  Home as HomeIcon,
+  Info as InfoIcon,
+  ShoppingCart as ShoppingCartIcon,
+  Lock as LockIcon,
+  PersonAdd as PersonAddIcon,
+  Category as CategoryIcon,
+  School as SchoolIcon,
+  Article as ArticleIcon,
+  Games as GamesIcon,
+  ToggleOn as ToggleOnIcon
+} from '@mui/icons-material';
 
 const MenuItemSidebar = () => {
   const navigate = useNavigate();
@@ -26,8 +36,8 @@ const MenuItemSidebar = () => {
       case 'Product':
         navigate('/product');
         break;
-      case 'Student':
-        navigate('/student');
+      case 'Photo':
+        navigate('/photos');
         break;
       case 'Post':
         navigate('/posts');
@@ -46,34 +56,34 @@ const MenuItemSidebar = () => {
   const getIconByIndex = (index: number) => {
     switch (index) {
       case 0:
-        return <HomeIcon />; 
+        return <HomeIcon />; // Home
       case 1:
-        return <InfoIcon />; 
+        return <InfoIcon />; // About
       case 2:
-        return <InfoIcon />; 
+        return <ShoppingCartIcon />; // Checkout
       case 3:
-        return <InfoIcon />; 
+        return <LockIcon />; // Auth
       case 4:
-        return <InfoIcon />; 
+        return <PersonAddIcon />; // SignUp
       case 5:
-        return <InfoIcon />; 
+        return <CategoryIcon />; // Product
       case 6:
-        return <InfoIcon />; 
+        return <SchoolIcon />; // Student
       case 7:
-        return <InfoIcon />; 
+        return <ArticleIcon />; // Post
       case 8:
-        return <InfoIcon />; 
+        return <GamesIcon />; // TicTacToe
       case 9:
-        return <InfoIcon />; 
+        return <ToggleOnIcon />; // UseState
       default:
-        return ; 
+        return null; // Fallback icon
     }
   };
  
 
   return (  
     <List>
-      {['Home', 'About', 'Checkout', 'Auth','SignUp', 'Product', 'Student','Post', 'TicTacToe', 'UseState'].map((text, index) => (
+      {['Home', 'About', 'Checkout', 'Auth','SignUp', 'Product', 'Photo','Post', 'TicTacToe', 'UseState'].map((text, index) => (
         <ListItem key={text} disablePadding>
           <ListItemButton onClick={() => handleNavigation(text)}>
             <ListItemIcon>

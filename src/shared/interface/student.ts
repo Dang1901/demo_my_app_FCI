@@ -6,6 +6,5 @@ export interface IStudent {
   gender: string;
   country: string;
   avatar: string;
-  btc_address: string;
 }
 export type Students = Pick<IStudent, 'id' | 'email' | 'avatar' | 'last_name'>[]

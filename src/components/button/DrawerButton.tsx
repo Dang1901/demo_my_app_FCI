@@ -9,7 +9,7 @@ import { CSSObject, styled, Theme, useTheme } from "@mui/material/styles";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import * as React from "react";
-import MenuItemSidebar from "../menuItem/MenuItemSidebar";
+import MenuItemSidebar from "../layout/Sidebar";
 
 const drawerWidth = 240;
 
