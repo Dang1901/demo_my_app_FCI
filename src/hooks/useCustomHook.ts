@@ -1,58 +1,77 @@
-import axios, { AxiosError } from "axios";
-import { apiUrl } from "../api/api";
-import { IPost } from "../shared/interface/post";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import axios from "axios";
 
-const apiUrl = "http://localhost:3000/posts"
+const apiUrl = "http://localhost:3000";
 
-export const useFetchApi = () => {
+// dung useQuery fetching data
+export const useFetchData = (endpoint: string) => {
   return useQuery({
-    queryKey: ["post"],
+    queryKey: [endpoint],
     queryFn: async () => {
-      const res = await axios.get(apiUrl);
-      return res.data;
+      const { data } = await axios.get(`${apiUrl}/${endpoint}`);
+      return data;
     },
   });
 };
-export const useFetchApibyId = (id) => {
-  return useQuery({
-    queryKey: ["post", id],
-    queryFn: async () => {
-      const res = await axios.get(`${apiUrl}/${id}`);
-      return res.data;
+
+// fetchApiById
+export const useFetchDataById = (endpoint: string, id: string | number) => {
+    return useQuery({
+      queryKey: [id],
+      queryFn: async () => {
+        const res = await axios.get(`${apiUrl}/${endpoint}/${id}`);
+        return res.data
+      }
+    })
+};
+
+// create
+export const useCreateData = (endpoint: string) => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (data) => {
+      const res = await axios.post(`${apiUrl}/${endpoint}`, data);
+      return res.data; 
     },
-    enabled: !!id,
+    onSuccess: () => {
+      queryClient.invalidateQueries({queryKey: [endpoint]});
+    },
+    onError: (error) => {
+      console.error("Error", error);
+    },
   });
 };
 
-// add
-export const addPost = async (data) => {
-  try {
-    const response = await axios.post(apiUrl, data);
-    return response.data;
-  } catch (error) {
-    console.error("xxxxxx", error);
-    throw error;
-  }
+// update
+export const useUpdateData = (endpoint: string) => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async ({id,data}: {id: string | number, data: any}) => {
+      const res = await axios.put(`${apiUrl}/${endpoint}/${id}`, data);
+      return res.data; 
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({queryKey: [endpoint]});
+    },
+    onError: (error) => {
+      console.error("Error", error);
+    },
+  });
 };
 
-// edit
-export const updatePost = async ({ id, ...data }) => {
-  try {
-    const response = await axios.put(`${apiUrl}/${id}`, data);
-    return response.data;
-  } catch (error) {
-    console.error("xxxxxx", error);
-    throw error;
-  }
-};
-export const removePost = async (id: number) => {
-  // console.log("xxxxx", id);
-  try {
-    const response = await axios.delete(`${apiUrl}/${id}`);
-    return response;
-  } catch (error) {
-    console.error("xxxxx", error);
-    throw error;
-  }
+// remove
+export const useRemoveData = (endpoint: string) => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (id) => {
+      const res = await axios.delete(`${apiUrl}/${endpoint}/${id}`);
+      return res.data; 
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({queryKey: [endpoint]});
+    },
+    onError: (error) => {
+      console.error("Error", error);
+    },
+  });
 };
