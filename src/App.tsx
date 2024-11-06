@@ -4,9 +4,10 @@ import Home from "./page/Home";
 import UseState from "./hooks/useState";
 import Hook from "./page/Hook";
 import UseContext from "./hooks/useContext";
-import UseCallback from "./hooks/useCallback";
+
 import UseEffect from "./hooks/useEffect";
 import UseMemo from "./hooks/useMemo";
+import UseCallback from "./hooks/UseCallback";
 
 // const DefaultLayout = React.lazy(() => import("./layout/DefaultLayout"));
 // const Home = React.lazy(() => import("./page/Home"));
@@ -75,7 +76,7 @@ function App() {
            },
            {
             path: 'usecallback',
-            element: <UseCallback />
+            element: <UseCallback/>
            },
            {
             path: 'useeffect',

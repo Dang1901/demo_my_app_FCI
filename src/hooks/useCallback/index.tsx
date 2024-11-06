@@ -1,36 +1,43 @@
-import React, { useState } from 'react'
-import ProductPage from './ProductPage';
-import { Button } from '@mui/material';
-import ShippingForm from './ShippingForm';
+import React, { memo, useCallback, useState } from 'react'
+import Content from './Content';
 
-const useCallback = () => {
-  const  [isDark, setIsDark] = useState(false);
-  const [parentCount, setParentCount] = useState(0);
+
+
+const UseCallback = () => {
+  const  [count, setCount] = useState(0);
+  // const  [count2, setCount2] = useState(0);
+
+  // const increase = () => {
+  //   setCount(count + 1)
+  //   // console.log(setCount);
+    
+  // }
+  // const increase2 = () => {
+  //   setCount2(count2 + 1)
+  //   // console.log(setCount);
+    
+  // }
+
+  const handleIncrease = useCallback(() => {
+    setCount(prevCount => prevCount + 1)
+  },[])
  
   return (
     <>
-      <label>
-        <input
-          type="checkbox"
-          checked={isDark}
-          onChange={e => setIsDark(e.target.checked)}
-        />
-        Dark mode
-      </label>
-      <Button onClick={() => setParentCount(parentCount + 1)}>
-        Re-render Parent Component
-      </Button>
-      <ShippingForm
-        onSubmit={(orderDetails) => console.log('Order details:', orderDetails)}
-      />
-      <hr />
-      <ProductPage
-        referrer="wizard_of_oz"
-        productId={123}
-        theme={isDark ? 'dark' : 'light'}
-      />
+      <div style={{padding: '10px 32px'}}>
+        
+        <Content onIcrease={handleIncrease}/>
+
+        {/* <Content count={count}/>
+        <h1>{count}</h1> */}
+        <h1>{count}</h1>
+        {/* <button onClick={increase}>Click me</button> */}
+        <br />
+        {/* <button onClick={increase2}>Click me2</button> */}
+        {/* <button onClick={handleIncrease}>Click me</button> */}
+      </div>
     </>
   )
 }
 
-export default useCallback
+export default UseCallback
