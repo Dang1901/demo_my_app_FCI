@@ -16,7 +16,7 @@ import {
   TableRow,
   Typography,
 } from "@mui/material";
-import { useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   useFetchData,
@@ -29,12 +29,11 @@ const ListPost = () => {
   const navigate = useNavigate();
   const { data: posts = [], isLoading, isError, error } = useFetchData("posts"); // fetch api posts
   const [snackBarOpen, setSnackBarOpen] = useState(false);
-  const [selectedId, setSelectedId] = useState(false);
+  const [selectedId, setSelectedId] = useState('');
   const { data: dialogOpenData, isPending } = useFetchDataById(
     "posts",
     selectedId || ""
   );
-  const [dialogOpen, setDiaLogOpen] = useState(false); // set thong bao mac dinh la false
   const [page, setPage] = useState(0); // số trang hiện tại là 0
   const [rowsPerPage, setRowsPerPage] = useState(5); // số hàng trên một trang là 5
 
@@ -66,15 +65,28 @@ const ListPost = () => {
     setPage(0);
   };
 
-  const handleDialogopen = (id: number) => {
+  const handleDialogopen = (id: string) => {
     setSelectedId(id);
-    setDiaLogOpen(true);
   };
 
   const handleDiaLogCloce = () => {
-    setSelectedId(null);
-    setDiaLogOpen(false);
+    setSelectedId('');
   };
+
+  const isOpen = useMemo(() => Boolean(selectedId) ,[selectedId])
+
+// useEffect(() => {
+//   console.log({page})
+// },[])
+
+const cache = useCallback(() =>{
+   console.log(page);
+},[ ])
+
+console.log(cache);
+
+
+
 
   // nếu posts là null | undefined trả về mảng rỗng, slice xuất một phần của mảng theo logic
   const paginatedPosts = (posts ?? []).slice(
@@ -93,6 +105,9 @@ const ListPost = () => {
       </Typography>
     );
   }
+
+
+
   return (
     <>
       <Button
@@ -125,7 +140,7 @@ const ListPost = () => {
                 <TableCell>{post.body}</TableCell>
                 <TableCell>
                   <ButtonGroup variant="text" aria-label="Basic button group">
-                    <Button onClick={() => handleDialogopen(post.id)}>
+                    <Button onClick={() => handleDialogopen(post.id.toString())}>
                       Detail
                     </Button>
                     <Button onClick={() => navigate(`/posts/edit/${post.id}`)}>
@@ -166,7 +181,7 @@ const ListPost = () => {
         </Alert>
       </Snackbar>
 
-      <Dialog open={dialogOpen} keepMounted onClose={handleDiaLogCloce}>
+      <Dialog open={isOpen} keepMounted onClose={handleDiaLogCloce}>
         <DialogContent>
           {isPending ? (
             <Typography>Loading...</Typography>
