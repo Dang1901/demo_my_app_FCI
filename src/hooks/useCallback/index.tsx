@@ -1,8 +1,11 @@
 import React, { useState } from 'react'
 import ProductPage from './ProductPage';
+import { Button } from '@mui/material';
+import ShippingForm from './ShippingForm';
 
 const useCallback = () => {
   const  [isDark, setIsDark] = useState(false);
+  const [parentCount, setParentCount] = useState(0);
  
   return (
     <>
@@ -14,6 +17,12 @@ const useCallback = () => {
         />
         Dark mode
       </label>
+      <Button onClick={() => setParentCount(parentCount + 1)}>
+        Re-render Parent Component
+      </Button>
+      <ShippingForm
+        onSubmit={(orderDetails) => console.log('Order details:', orderDetails)}
+      />
       <hr />
       <ProductPage
         referrer="wizard_of_oz"
