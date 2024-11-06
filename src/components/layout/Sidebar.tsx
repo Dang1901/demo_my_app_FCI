@@ -12,6 +12,7 @@ import {
   Games as GamesIcon,
   ToggleOn as ToggleOnIcon
 } from '@mui/icons-material';
+import WebhookIcon from '@mui/icons-material/Webhook';
 
 const MenuItemSidebar = () => {
   const navigate = useNavigate();
@@ -45,8 +46,8 @@ const MenuItemSidebar = () => {
       case 'TicTacToe':
         navigate('/tictactoe');
         break;
-      case 'UseState':
-        navigate('/usestate');
+      case 'Hook':
+        navigate('/hooks');
         break;
       default:
         navigate('/');
@@ -58,23 +59,25 @@ const MenuItemSidebar = () => {
       case 0:
         return <HomeIcon />; // Home
       case 1:
-        return <InfoIcon />; // About
+        return <WebhookIcon />; 
       case 2:
         return <ShoppingCartIcon />; // Checkout
-      case 3:
-        return <LockIcon />; // Auth
-      case 4:
-        return <PersonAddIcon />; // SignUp
-      case 5:
-        return <CategoryIcon />; // Product
-      case 6:
-        return <SchoolIcon />; // Student
-      case 7:
-        return <ArticleIcon />; // Post
-      case 8:
-        return <GamesIcon />; // TicTacToe
-      case 9:
-        return <ToggleOnIcon />; // UseState
+      // case 3:
+      //   return <LockIcon />; // Auth
+      // case 4:
+      //   return <PersonAddIcon />; // SignUp
+      // case 5:
+      //   return <CategoryIcon />; // Product
+      // case 6:
+      //   return <SchoolIcon />; // Student
+      // case 7:
+      //   return <ArticleIcon />; // Post
+      // case 8:
+      //   return <GamesIcon />; // TicTacToe
+      // case 9:
+      //   return <ToggleOnIcon />; // UseState
+      // case 10:
+      //   return <WebhookIcon />; // Hook
       default:
         return null; // Fallback icon
     }
@@ -83,7 +86,7 @@ const MenuItemSidebar = () => {
 
   return (  
     <List>
-      {['Home', 'About', 'Checkout', 'Auth','SignUp', 'Product', 'Photo','Post', 'TicTacToe', 'UseState'].map((text, index) => (
+      {['Home', 'Hook', 'About', ].map((text, index) => (
         <ListItem key={text} disablePadding>
           <ListItemButton onClick={() => handleNavigation(text)}>
             <ListItemIcon>

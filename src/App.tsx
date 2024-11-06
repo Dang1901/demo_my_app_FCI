@@ -1,19 +1,12 @@
-import { Suspense } from "react";
-import { Route, Routes } from "react-router-dom";
+import { useRoutes } from "react-router-dom";
 import DefaultLayout from "./layout/DefaultLayout";
-// import About from "./page/About";
-// import Authentication from "./page/auth";
-import Checkout from "./page/Checkout";
 import Home from "./page/Home";
-import Product from "./page/Product";
-// import Students from "./page/Students";
-import PhotoLists from "./page/Photos";
-import AddPhotoForm from "./page/Photos/ActionModule/Create";
-import EditPhotoForm from "./page/Photos/ActionModule/Update";
-import AddUserForm from "./page/Post/ActionModule/Create";
-import EditUserForm from "./page/Post/ActionModule/Update";
-import ListPost from "./page/Post/index";
-import TicTacToe from "./page/TicTacToe";
+import UseState from "./hooks/useState";
+import Hook from "./page/Hook";
+import UseContext from "./hooks/useContext";
+import UseCallback from "./hooks/useCallback";
+import UseEffect from "./hooks/useEffect";
+import UseMemo from "./hooks/useMemo";
 
 // const DefaultLayout = React.lazy(() => import("./layout/DefaultLayout"));
 // const Home = React.lazy(() => import("./page/Home"));
@@ -53,38 +46,52 @@ import TicTacToe from "./page/TicTacToe";
 // ]);
 
 function App() {
-  return (
-    <>
-    <Suspense>
-      <Routes>
-        <Route path="/" element={<DefaultLayout />}>
-          <Route path="home" element={<Home />} />
-          {/* <Route path="about" element={<About />} /> */}
-          <Route path="checkout" element={<Checkout />} />
-          {/* <Route path="authentication" element={<Authentication />} /> */}
-          <Route path="product" element={<Product />} />
-          {/* <Route path="student" element={<Students />} /> */}
-          <Route path="posts" element={<ListPost />} />
-          <Route path="tictactoe" element={<TicTacToe />} />
-          {/* <Route path="add" element={<AddUser />} /> */}
-        </Route>
+  const route = useRoutes([
+    {
+      path: "/",
+      element: <DefaultLayout/>,
+      children: [
+        {
+          path: "home",
+          element: <Home />
+        }
+      ]
+    },
+    {
+      path: "/",
+      element: <DefaultLayout/>,
+      children: [
+        {
+          path: "hooks",
+          element: <Hook />,
+          children: [
+           {
+            path: 'usestate',
+            element: <UseState />
+           },
+           {
+            path: 'usecontext',
+            element: <UseContext />
+           },
+           {
+            path: 'usecallback',
+            element: <UseCallback />
+           },
+           {
+            path: 'useeffect',
+            element: <UseEffect />
+           },
+           {
+            path: 'usememo',
+            element: <UseMemo />
+           },
+          ]
+        }
+      ]
+    }
+  ])
 
-        <Route path="/posts" element={<DefaultLayout />}>
-          <Route index element={<ListPost />} />
-          <Route path="add" element={<AddUserForm />} />
-          <Route path="edit/:id" element={<EditUserForm />} />
-        </Route>
-        <Route path="/photos" element={<DefaultLayout />}>
-          <Route index element={<PhotoLists />} />
-          <Route path="add" element={<AddPhotoForm />} />
-          <Route path="edit/:id" element={<EditPhotoForm />} />
-        </Route>
-      </Routes>
-      </Suspense>
-    </>
-  );
-
-  // <RouterProvider router={router}/>
+  return route;
 }
 
 export default App;
