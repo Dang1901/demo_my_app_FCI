@@ -1,8 +1,14 @@
-import { useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
 import ShippingForm from './ShippingForm'; 
 
 export default function ProductPage({ productId, referrer, theme }) {
-  const handleSubmit = useCallback((orderDetails) => {
+//   function handleSubmit(orderDetails) {
+//     post('/product/' + productId + '/buy', {
+//       referrer,
+//       orderDetails,
+//     });
+//   }
+const handleSubmit = useCallback((orderDetails) => {
     post('/product/' + productId + '/buy', {
       referrer,
       orderDetails,

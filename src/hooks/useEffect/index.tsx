@@ -1,8 +1,19 @@
-import React from 'react'
+import React, { useState } from 'react'
+import FetchApi from './FetchApi';
+import { Button } from '@mui/material';
 
 const UseEffect = () => {
+  const [show, setShow] = useState(false);
   return (
-    <div>UseEffect</div>
+    <>
+      <Button
+        variant='outlined'
+        onClick={() => setShow(!show)}
+      >Toggle
+      </Button>
+       {show && <FetchApi/>}
+    </>
+   
   )
 }
 
